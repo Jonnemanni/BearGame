@@ -21,15 +21,46 @@ public class PlayerController : MonoBehaviour
     // Direction
     [SerializeField] private float hDirection;
     [SerializeField] private float vDirection;
-    // Ground Layer
+    // Ground & Door Layer
     [SerializeField] private LayerMask ground;
-    
+    [SerializeField] private LayerMask door;
+    // Checking if we are on door and if we have went through door recently.
+    [SerializeField] private bool ondoor;
+    [SerializeField] private bool gonethrudoor;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
+    }
+
+    // OnTriggerStay2d that currently checks if we are on a door, and then checks if we are trying to enter the door by pressing jump.
+    private void OnTriggerStay2D(Collider2D other) {
+        if (other.gameObject.tag == "Door")
+        {
+            ondoor = true;
+        }
+        if (other.gameObject.tag == "Door" && Input.GetButton("Jump") && gonethrudoor == false)
+        {
+            Debug.Log("Walk through attempted.");
+            DoorScript ds = other.GetComponent<DoorScript>();
+            ds.WalkThrough(this.gameObject);
+            gonethrudoor = true;
+            StartCoroutine(DoorTimer());
+        }
+    }
+
+    // A simple half a second coroutine that then sets 'gonethrudoor' to be true.
+    IEnumerator DoorTimer()
+    {
+        yield return new WaitForSeconds(0.5f);
+        gonethrudoor = false;
+    }
+
+    // On trigger exit where we ensure that the 'on top of door' check is brought back to false.
+    private void OnTriggerExit2D(Collider2D other) {
+        ondoor = false;
     }
 
     // Update is called once per frame
@@ -54,8 +85,8 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(0,rb.velocity.y);
         }
 
-        // Jump
-        if (Input.GetButtonDown("Jump") && collider.IsTouchingLayers(ground))
+        // We jump if we have pressed the jump button, are on ground, and are not in front of a door.
+        if (Input.GetButtonDown("Jump") && collider.IsTouchingLayers(ground) && ondoor == false)
         {
             rb.velocity = new Vector2(rb.velocity.x,jumpHeight);
         }
