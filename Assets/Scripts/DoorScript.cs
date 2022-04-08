@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {   
-    // Telling this door which one it leads to.
+    // Telling this door which scene it leads to by giving it the index. See Loader.cs for the list.
+    [SerializeField] private int scene = 0;
+    // Enumerated list of possible scenes.
+    // Telling this door which other door in the scene it leads to.
     [SerializeField] private GameObject exit;
     // Start is called before the first frame update
     void Start()
@@ -19,9 +22,18 @@ public class DoorScript : MonoBehaviour
     }
 
     // Method that is called by a player wanting to walk through a door. Receives the player/walker as a game object and then moves that player to where this doors exit is.
+    // Prioritizes sending them to another scene.
     public void WalkThrough(GameObject walker)
     {
-        Debug.Log("Tried to walk through.");
-        walker.transform.position = exit.transform.position;
+        if (scene != 0) {
+            Debug.Log("Tried to walk to different scene.");
+            Loader.load(scene);
+        }
+        else if (exit != null) {
+            Debug.Log("Tried to walk in scene.");
+            walker.transform.position = exit.transform.position;
+        } else {
+            Debug.Log("No scene or exit set.");
+        }
     }
 }
