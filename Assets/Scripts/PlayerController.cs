@@ -65,28 +65,29 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
+
         hDirection = Input.GetAxis("Horizontal");
         // Moving Right
-        if (hDirection>0) 
+        if (hDirection>0 && !DialogueManager.GetInstance().dialoguePlaying) 
         {
             rb.velocity = new Vector2(walkSpeed,rb.velocity.y);
             transform.localScale = new Vector2(1, 1);
         }
         // Moving Left
-        else if (hDirection<0) 
+        else if (hDirection<0 && !DialogueManager.GetInstance().dialoguePlaying) 
         {
             rb.velocity = new Vector2(-walkSpeed,rb.velocity.y);
             transform.localScale = new Vector2(-1, 1);
-        }
+        }        
         // Stopped
         else
         {
             rb.velocity = new Vector2(0,rb.velocity.y);
         }
 
-        // We jump if we have pressed the jump button, are on ground, and are not in front of a door.
-        if (Input.GetButtonDown("Jump") && collider.IsTouchingLayers(ground) && ondoor == false)
+        // We jump if we have pressed the jump button, are on ground, are not in front of a door, and are not in dialogue.
+        if (Input.GetButtonDown("Jump") && collider.IsTouchingLayers(ground) && ondoor == false && !DialogueManager.GetInstance().dialoguePlaying)
         {
             rb.velocity = new Vector2(rb.velocity.x,jumpHeight);
         }
