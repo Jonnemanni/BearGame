@@ -1,7 +1,7 @@
 -> main
 
 === main ===
-Greetings, I am ur mum.
+Greetings, I am ur mum. #speaker:jam #portrait:jamPortrait
     + [Goddamnit]
         -> chosen("Goddamnit Jam!")
     + [Orly?]
@@ -10,5 +10,5 @@ Greetings, I am ur mum.
         -> chosen("No you ain't!")
         
 === chosen(choice) ===
-{choice}
+{choice} #speaker:jonne #portrait:jonnePortrait
 -> END  

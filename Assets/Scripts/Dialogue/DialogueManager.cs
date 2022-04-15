@@ -7,9 +7,11 @@ using Ink.Runtime;
 
 public class DialogueManager : MonoBehaviour
 {
-    // Dialogue panel and the text object in the UI.
+    // UI Stuff.
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI displayNameText;
+    [SerializeField] private Animator portraitAnimator;
 
     // Choices UI
     [SerializeField] private GameObject[] choices;
@@ -23,6 +25,10 @@ public class DialogueManager : MonoBehaviour
 
     // Setting up a singleton class and initializing it in the awake method.
     private static DialogueManager instance;
+
+    // Constants relating to tags in our INK files
+    private const string SPEAKER_TAG = "speaker";
+    private const string PORTRAIT_TAG = "portrait";
 
 
     private void Awake() 
@@ -100,10 +106,45 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text = currentStory.Continue();
             // Display choices.
             DisplayChoices();
+            // Handling tags.
+            HandleTags(currentStory.currentTags);
         }
         else
         {
             StartCoroutine(ExitDialogue());
+        }
+    }
+
+    // Method for handling the speaker, portrait, and layout tags.
+    private void HandleTags(List<string> currentTags)
+    {
+        // Loop through each tag and handle it.
+        foreach(string tag in currentTags)
+        {
+            // Parse the tag
+            string[] splitTag = tag.Split(':');
+            if (splitTag.Length != 2)
+            {
+                Debug.LogError("Could not parse tag, not correct length. " + tag);
+            }
+            string tagKey = splitTag[0].Trim();
+            string tagValue = splitTag[1].Trim();
+
+            // Handle the tag.
+            switch(tagKey)
+            {
+                case SPEAKER_TAG:
+                    Debug.Log("Speaker: " + tagValue);
+                    displayNameText.text = tagValue;
+                    break;
+                case PORTRAIT_TAG:
+                    Debug.Log("Portrait: " + tagValue);
+                    portraitAnimator.Play(tagValue);
+                    break;
+                default:
+                    Debug.Log("Tag came in but wasn't handled." + tagKey);
+                    break;
+            }
         }
     }
 
