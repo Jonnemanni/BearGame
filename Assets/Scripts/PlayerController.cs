@@ -6,8 +6,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public int walkSpeed;
-    // Jump Height variable for easy editing.
-    public int jumpHeight;
     // Getting Rigidbody2D under the name RB.
     [SerializeField] private Rigidbody2D rb;
     // Getting Collider2d under the name Collider.
@@ -16,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator anim;
     // Walk Speed variable for easy editing.
     // Enumerating states.
-    private enum State {idle, run, jump};
+    private enum State {idle, run, sit};
     [SerializeField] private State state = State.idle;
     // Direction
     [SerializeField] private float hDirection;
@@ -27,6 +25,9 @@ public class PlayerController : MonoBehaviour
     // Checking if we are on door and if we have went through door recently.
     [SerializeField] private bool ondoor;
     [SerializeField] private bool gonethrudoor;
+    // A simple little bool to tell the animator that the player is set to be sitting down.
+    [SerializeField] private bool sitting;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,25 +87,25 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(0,rb.velocity.y);
         }
 
-        // We jump if we have pressed the jump button, are on ground, are not in front of a door, and are not in dialogue.
-        if (Input.GetButtonDown("Jump") && collider.IsTouchingLayers(ground) && ondoor == false && !DialogueManager.GetInstance().dialoguePlaying)
-        {
-            rb.velocity = new Vector2(rb.velocity.x,jumpHeight);
-        }
-
         velocityState();
         anim.SetInteger("State", (int)state);
     }
 
+    // Inverts the 'sit' boolean, triggered by a signal.
+    public void sitInvert()
+    {
+        sitting = !sitting;
+    }
+
     private void velocityState()
     {
-        if(vDirection!=0)
-        {
-            state = State.jump;
-        }
-        else if(Mathf.Abs(rb.velocity.x) > 2f)
+        if(Mathf.Abs(rb.velocity.x) > 2f)
         {
             state = State.run;
+        }
+        else if(sitting == true)
+        {
+            state = State.sit;
         }
         else
         {
