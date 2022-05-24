@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DoorScript : MonoBehaviour
 {   
     // Telling this door which scene it leads to by giving it the index. See Loader.cs for the list.
-    [SerializeField] private int scene = 0;
+    [SerializeField] private string scene;
     // Enumerated list of possible scenes.
     // Telling this door which other door in the scene it leads to.
     [SerializeField] private GameObject exit;
@@ -25,9 +26,9 @@ public class DoorScript : MonoBehaviour
     // Prioritizes sending them to another scene.
     public void WalkThrough(GameObject walker)
     {
-        if (scene != 0) {
+        if (scene != null) {
             Debug.Log("Tried to walk to different scene.");
-            Loader.load(scene);
+            SceneManager.LoadScene(scene);
         }
         else if (exit != null) {
             Debug.Log("Tried to walk in scene.");
