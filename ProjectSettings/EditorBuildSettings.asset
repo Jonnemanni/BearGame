@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/JonnenHuone.unity
+    path: Assets/Scenes/Koti.unity
     guid: 8f51a4bbaa229154caeb93cb08a679fe
   - enabled: 1
     path: "Assets/Scenes/Keitti\xF6.unity"

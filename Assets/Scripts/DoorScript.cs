@@ -26,7 +26,7 @@ public class DoorScript : MonoBehaviour
     // Prioritizes sending them to another scene.
     public void WalkThrough(GameObject walker)
     {
-        if (scene != null) {
+        if (scene != "") {
             Debug.Log("Tried to walk to different scene.");
             SceneManager.LoadScene(scene);
         }

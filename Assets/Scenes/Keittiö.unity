@@ -587,6 +587,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9582ed2aeab92144ca1324040749a025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upClamp: 0
+  downClamp: 0
+  leftClamp: 0
+  rightClamp: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -810,7 +814,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &963137398
 RectTransform:
   m_ObjectHideFlags: 0
@@ -913,7 +917,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9037552253618636129, guid: 4112144771f79f7449de8b6f5ae8a58d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.6
+      value: -3.63
       objectReference: {fileID: 0}
     - target: {fileID: 9037552253618636129, guid: 4112144771f79f7449de8b6f5ae8a58d, type: 3}
       propertyPath: m_LocalPosition.y

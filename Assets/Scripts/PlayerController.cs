@@ -69,6 +69,13 @@ public class PlayerController : MonoBehaviour
     {
 
         hDirection = Input.GetAxis("Horizontal");
+
+        // If sitting and trying to move, stop sitting.
+        if (sitting && Mathf.Abs(hDirection) > 0)
+        {
+            sitInvert();
+        }
+
         // Moving Right
         if (hDirection>0 && !DialogueManager.GetInstance().dialoguePlaying) 
         {
