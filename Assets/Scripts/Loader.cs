@@ -6,7 +6,11 @@ using UnityEngine.SceneManagement;
 public static class Loader
 {
     public enum Scene {
-        SampleScene=1, TestScene=2
+        IntroScene=0, 
+        Koti=1, 
+        Tori=2, 
+        Kahvila=3, 
+        Tykki=4, 
     }
     public static void load(int index) {
         Scene scene = (Scene)index;

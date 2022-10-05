@@ -13,6 +13,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI displayNameText;
     [SerializeField] private Animator portraitAnimator;
 
+    // EndHolder object, activated so that it can then wait for dialogue to end and activate the EndCutscene.
+    [SerializeField] private GameObject EndHolder;
+
     // Choices UI
     [SerializeField] private GameObject[] choices;
     private TextMeshProUGUI[] choicesText;
@@ -29,6 +32,10 @@ public class DialogueManager : MonoBehaviour
     // Constants relating to tags in our INK files
     private const string SPEAKER_TAG = "speaker";
     private const string PORTRAIT_TAG = "portrait";
+    private const string END_TAG = "end";
+    private const string POINTS_TAG = "points";
+    // Getting the scoreSO
+    [SerializeField] private ScoreTracker scoreSO;
 
 
     private void Awake() 
@@ -115,7 +122,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    // Method for handling the speaker, portrait, and layout tags.
+    // Method for handling the speaker, portrait, end, and score tags.
     private void HandleTags(List<string> currentTags)
     {
         // Loop through each tag and handle it.
@@ -140,6 +147,14 @@ public class DialogueManager : MonoBehaviour
                 case PORTRAIT_TAG:
                     Debug.Log("Portrait: " + tagValue);
                     portraitAnimator.Play(tagValue);
+                    break;
+                case END_TAG:
+                    Debug.Log("End: " + tagValue);
+                    EndHolder.SetActive(true);
+                    break;
+                case POINTS_TAG:
+                    Debug.Log("Points: " + tagValue);
+                    scoreSO.Score += int.Parse(tagValue);
                     break;
                 default:
                     Debug.Log("Tag came in but wasn't handled." + tagKey);
