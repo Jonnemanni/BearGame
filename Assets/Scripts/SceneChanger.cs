@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
@@ -10,12 +11,13 @@ public class SceneChanger : MonoBehaviour
         Tori=2, 
         Kahvila=3, 
         Tykki=4,
+        Loppu=5,
     */
     [SerializeField] private int index;
 
     // Start is called before the first frame update
     void Start()
     {
-        Loader.load(index);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

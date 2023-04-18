@@ -16,13 +16,13 @@ Vanhempien kaa asunu, jep. #speaker:Jonne #portrait:jonneNeutral
 
 Aikomuksia muuttaa muualle pian? #speaker:Eeva #portrait:eevaSmile
 
-Noh, pitää tuoda koulun loppu projekti loppuun. #speaker:Jonne #portrait:jonneNeutral
+Noh, pitää tuoda koulun loppuprojekti loppuun. #speaker:Jonne #portrait:jonneNeutral
 
 Okei, miten se menee? #speaker:Eeva #portrait:eevaSmile
 
 Eh... en tiiä mikä on mutta motivaatio sen kanssa on lähellä nollaa... en oo varma et onks tää burnouttia vai mitä. #speaker:Jonne #portrait:jonneNeutral
 
-Hyvä kysymys... #speaker:Eeva #portrait:eevaSmile
+Hyvä kysymys... #speaker:Eeva #portrait:eevaNeutral
 
 Kuitenki, jos saan kysyä, minkäs takia sä oot näin mut vetäny jutustelee? #speaker:Jonne #portrait:jonneNeutral
 
@@ -95,7 +95,7 @@ Mhm.  #speaker:jonne #portrait:jonneSmile
 
 == NOGOD ==
 
-Ottaen huomioon meiän maailman tilanteen, meillä ei ole jumalaa joka voisi olle kaiken tietävä, kaikkeen pystyvä, ja ikuisesti hyvä.  #speaker:jonne #portrait:jonneAngry
+Ottaen huomioon meiän maailman tilanteen, meillä ei ole jumalaa joka voisi olla kaiken tietävä, kaikkeen pystyvä, ja ikuisesti hyvä.  #speaker:jonne #portrait:jonneAngry
 
 Hmm... en ole itse samaa mieltä, mutta ymmärrän mistä tämä tulee. #speaker:Eeva #portrait:eevaSad #points:0
 

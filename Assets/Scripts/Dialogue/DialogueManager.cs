@@ -36,6 +36,11 @@ public class DialogueManager : MonoBehaviour
     private const string POINTS_TAG = "points";
     // Getting the scoreSO
     [SerializeField] private ScoreTracker scoreSO;
+    // A private boolean that tells if we're making a choice or not.
+    private bool MakingChoice;
+    // a private boolean to tell that we're starting the first line of text.
+    // With this I hope to FINALLY fix a bug causing the first line to be skipped.
+    private bool FirstLine = true;
 
 
     private void Awake() 
@@ -52,6 +57,7 @@ public class DialogueManager : MonoBehaviour
     {
         dialoguePlaying = false;
         dialoguePanel.SetActive(false);
+        MakingChoice = false;
 
         // Get all of the choices text
         choicesText = new TextMeshProUGUI[choices.Length];
@@ -72,8 +78,8 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        // If the player presses the button to progress, then do so.
-        if (Input.GetButtonDown("Talk"))
+        // If the player presses the button to progress, then do so. Except if we're making a choice.
+        if (Input.GetButtonDown("Talk") && MakingChoice == false && FirstLine == false)
         {
             ContinueStory();
         }
@@ -93,6 +99,7 @@ public class DialogueManager : MonoBehaviour
         dialoguePlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
+        FirstLine = true;
     }
 
     // Entering and doing dialogue.
@@ -107,14 +114,25 @@ public class DialogueManager : MonoBehaviour
     // Method that simply continues the story, since it's done at multiple places.
     private void ContinueStory()
     {
+        StartCoroutine(Waiter());
+    }
+
+    IEnumerator Waiter()
+    {
         if (currentStory.canContinue)
         {
+            //Wait for 0.1 second
+            yield return new WaitForSeconds(0.01f);
             // Set text for current dialogue line.
-            dialogueText.text = currentStory.Continue();
+            if (currentStory.canContinue)
+            {
+                dialogueText.text = currentStory.Continue();
+            }
             // Display choices.
             DisplayChoices();
             // Handling tags.
             HandleTags(currentStory.currentTags);
+            FirstLine = false;
         }
         else
         {
@@ -182,18 +200,27 @@ public class DialogueManager : MonoBehaviour
             choices[index].gameObject.SetActive(true);
             choicesText[index].text = choice.text;
             index++;
+            MakingChoice = true;
         }
         // Get the remaining choices in the UI and disable them.
         for (int i = index; i < choices.Length; i++)
         {
             choices[i].gameObject.SetActive(false);
         }
-
         EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
     }
 
     public void MakeChoice(int choiceIndex)
     {
-        currentStory.ChooseChoiceIndex(choiceIndex);
+        int index = 0;
+        for (int i = index; i < choices.Length; i++)
+        {   
+            if(choices[i] == EventSystem.current.currentSelectedGameObject)
+            {
+                currentStory.ChooseChoiceIndex(choiceIndex);
+                MakingChoice = false;
+                break;
+            }
+        }
     }
 }

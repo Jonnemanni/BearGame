@@ -14,9 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Koti.unity
     guid: 8f51a4bbaa229154caeb93cb08a679fe
-  - enabled: 0
-    path: "Assets/Scenes/Keitti\xF6.unity"
-    guid: f7d4fbfd6a9570c47ab6812d3403f922
   - enabled: 1
     path: Assets/Scenes/Tori.unity
     guid: a2295a616757c2e4d92cc33a8ee0ed8c
@@ -26,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tykki.unity
     guid: 546d31a5fe768c84192793d62edd7b04
+  - enabled: 1
+    path: "Assets/Scenes/LoppuN\xE4ytt\xF6.unity"
+    guid: 159d473d797fc1f469adb89042a66017
   m_configObjects: {}

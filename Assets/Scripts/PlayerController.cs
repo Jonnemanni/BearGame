@@ -27,6 +27,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool gonethrudoor;
     // A simple little bool to tell the animator that the player is set to be sitting down.
     [SerializeField] private bool sitting;
+    // The players audiosource for footsteps.
+    private AudioSource playerAudio;
+    // The two audioclips for steppies.
+    [SerializeField] AudioClip step1;
+    [SerializeField] AudioClip step2;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +39,19 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
+        playerAudio = GetComponent<AudioSource>();
+    }
+
+    // a simple public thing for step1 to be played during the walk cycle.
+    public void playStep1()
+    {
+        playerAudio.PlayOneShot(step1, 0.25f);
+    }
+
+    // a simple public thing for step2 to be played during the walk cycle.
+    public void playStep2()
+    {
+        playerAudio.PlayOneShot(step2, 0.25f);
     }
 
     // OnTriggerStay2d that currently checks if we are on a door, and then checks if we are trying to enter the door by pressing jump.
@@ -77,7 +95,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Moving Right
-        if (hDirection>0 && !DialogueManager.GetInstance().dialoguePlaying) 
+        if (hDirection>0) 
         {
             rb.velocity = new Vector2(walkSpeed,rb.velocity.y);
             transform.localScale = new Vector2(1, 1);

@@ -181,7 +181,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "W A S D tai Nuoli N\xE4pp\xE4imet liikuttaa.\nCtrl ja Shift saavat pelaajan
-    puhumaan\n___ ovat pieni\xE4 puhumuksia\n_ jatkavat tarinaaa\nDialogi valinnoissa
+    puhumaan\n___ ovat pieni\xE4 puhumuksia\n_ jatkavat tarinaa\nDialogi valinnoissa
     yl\xF6s- ja alasp\xE4in taikka W ja S n\xE4pp\xE4imet valitsevat, Ctrl ja Shift
     vahvistavat\nVoit my\xF6s k\xE4ytt\xE4\xE4 hiirt\xE4"
   m_isRightToLeft: 0
@@ -643,7 +643,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396230220}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -127.9, y: 28.724, z: -3006.0002}
+  m_LocalPosition: {x: -130, y: 28.724, z: -3006.0002}
   m_LocalScale: {x: 33.4, y: 33.4, z: 0}
   m_Children: []
   m_Father: {fileID: 250738973}
@@ -1686,7 +1686,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4136533407516312481}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -91.7, y: -5.7114005, z: -3006.0002}
+  m_LocalPosition: {x: -85, y: -5.7114005, z: -3006.0002}
   m_LocalScale: {x: 5.01, y: 10.02, z: 136.5058}
   m_Children:
   - {fileID: 4136533408091047180}

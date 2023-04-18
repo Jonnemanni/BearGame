@@ -11,6 +11,7 @@ public static class Loader
         Tori=2, 
         Kahvila=3, 
         Tykki=4, 
+        LoppuNäyttö=5, 
     }
     public static void load(int index) {
         Scene scene = (Scene)index;
